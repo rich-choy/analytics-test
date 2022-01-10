@@ -20,16 +20,15 @@
 
     const onClickButton = (event) => {
       event.preventDefault();
-      history.replaceState
+      const buttonName = event.target.className;
+      const nextUrl = `${location.pathname}#${buttonName}`;
+      history.replaceState({}, document.title, nextUrl);
     };
 
     const buttons = new Map(['a', 'b', 'c'].map((name) => {
       const button = document.querySelector(`button.${name}`);
       return [name, button];
     }));
-
-
-
 
   })();
   </script>
