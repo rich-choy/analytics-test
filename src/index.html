@@ -5,6 +5,13 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2VYGBMC1X0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2VYGBMC1X0');
+  </script>
 </head>
 
 <body>
@@ -21,8 +28,9 @@
     const onClickButton = (event) => {
       event.preventDefault();
       const buttonName = event.target.className;
-      const nextUrl = `${location.pathname}#${buttonName}`;
-      history.replaceState({}, document.title, nextUrl);
+      const url = `${location.pathname}#${buttonName}`;
+      history.replaceState({}, document.title, url);
+      ga('send', 'pageview', url);
     };
 
     const buttons = new Map(['a', 'b', 'c'].map((name) => {
