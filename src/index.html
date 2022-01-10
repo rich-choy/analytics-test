@@ -5,7 +5,6 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
-<!-- Google Analytics -->
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -14,14 +13,40 @@
     ga('create', 'UA-216582050-1', 'auto');
     ga('send', 'pageview');
   </script>
+  <style>
+    .button-wrap {
+      position: relative;
+      width: 100%;
+      min-height: 2rem;
+    }
+    .button-wrap button {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate3d(-50%, 0, 0);
+      width: 100%;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="container">
+  <div class="container" style="margin: 2rem">
     <div class="row">
-      <div class="column"><button class="a">A</button></div>
-      <div class="column"><button class="b">B</button></div>
-      <div class="column"><button class="c">C</button></div>
+      <div class="column">
+        <div class="button-wrap">
+          <button class="button" data-name="a">A</button>
+        </div>
+      </div>
+      <div class="column">
+        <div class="button-wrap">
+          <button class="button" data-name="b">B</button>
+        </div>
+      </div>
+      <div class="column">
+        <div class="button-wrap">
+          <button class="button" data-name="c">C</button>
+        </div>
+      </div>
     </div>
   </div>
   <script>
@@ -29,15 +54,15 @@
 
     const onClickButton = (event) => {
       event.preventDefault();
-      const button = event.target;
-      const buttonName = button.className;
-      const url = `${location.pathname}#${buttonName}`;
+      const {name} = event.target.dataset;
+      const url = `${location.pathname}#${name}`;
       history.replaceState({}, document.title, url);
       ga('send', 'pageview', url);
     };
 
     const buttons = new Map(['a', 'b', 'c'].map((name) => {
-      const button = document.querySelector(`button.${name}`);
+      const btns = [].slice.call(document.querySelectorAll('button'));
+      const button = btns.filter((btn) => btn.dataset.name === name)[0];
       button.addEventListener('click', onClickButton);
       return [name, button];
     }));
