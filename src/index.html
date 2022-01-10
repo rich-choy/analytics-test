@@ -47,6 +47,11 @@
           <button class="button" data-name="c">C</button>
         </div>
       </div>
+    </div><!--/.row-->
+    <div class="row" style="margin-top: 4rem">
+      <div class="column">
+        <textarea></textarea>
+      </div>
     </div>
   </div>
   <script>
@@ -67,7 +72,8 @@
       return [name, button];
     }));
 
-    console.log(buttons);
+    document.querySelector('textarea').innerHTML = 'Change me';
+
   })();
   </script>
 </body>
