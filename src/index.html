@@ -35,6 +35,7 @@
 
     const buttons = new Map(['a', 'b', 'c'].map((name) => {
       const button = document.querySelector(`button.${name}`);
+      button.addEventListener('click', onClickButton);
       return [name, button];
     }));
 
